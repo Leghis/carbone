@@ -82,6 +82,17 @@ interface CarbonFootprintResult {
     };
 }
 
+interface RecommendationAction {
+    title: string;
+    impact: string;
+    description: string;
+}
+
+interface RecommendationCategory {
+    category: string;
+    actions: RecommendationAction[];
+}
+
 const initialFormData: FormData = {
     transport: {
         carType: "none",
@@ -290,10 +301,10 @@ export default function CarbonCalculator() {
     };
 
     const getDetailedRecommendations = () => {
-        const recommendations: { category: string; actions: { title: string; impact: string; description: string }[] }[] = [];
+        const recommendations: RecommendationCategory[] = [];
 
         // Recommandations transport
-        const transportRecs = {
+        const transportRecs: RecommendationCategory = {
             category: "Transport",
             actions: []
         };
@@ -326,7 +337,7 @@ export default function CarbonCalculator() {
             recommendations.push(transportRecs);
         }
         // Recommandations énergie
-        const energyRecs = {
+        const energyRecs: RecommendationCategory = {
             category: "Énergie",
             actions: []
         };
@@ -368,7 +379,7 @@ export default function CarbonCalculator() {
         }
 
         // Recommandations mode de vie
-        const lifestyleRecs = {
+        const lifestyleRecs: RecommendationCategory = {
             category: "Mode de vie",
             actions: []
         };
